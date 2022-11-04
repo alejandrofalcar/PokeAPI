@@ -11,9 +11,11 @@ import {
   Stack,
   Checkbox,
   Text,
-} from '@chakra-ui/react';
-import { useState } from 'react';
-import axios from 'axios';
+} from "@chakra-ui/react";
+import { useState } from "react";
+import axios from "axios";
+import { searchPokemon } from "../../services/Api";
+import { Route } from "react-router-dom";
 
 export function ModalPokemon({ pokemon, isOpen, onClose }) {
   const [secondTypePokemon, setSecondTypePokemon] = useState([]);
@@ -22,7 +24,7 @@ export function ModalPokemon({ pokemon, isOpen, onClose }) {
   const [secondChecked, setSecondChecked] = useState(false);
 
   function toggleValueFirst(type) {
-    setFirstChecked(oldValue => {
+    setFirstChecked((oldValue) => {
       const newValue = !oldValue;
       if (newValue) {
         fetchFirstType(type);
@@ -34,7 +36,7 @@ export function ModalPokemon({ pokemon, isOpen, onClose }) {
   }
 
   function toggleValueSecond(type) {
-    setSecondChecked(oldValue => {
+    setSecondChecked((oldValue) => {
       const newValue = !oldValue;
       if (newValue) {
         fetchSecondType(type);
@@ -44,51 +46,53 @@ export function ModalPokemon({ pokemon, isOpen, onClose }) {
       return newValue;
     });
   }
-  const fetchFirstType = type => {
+  const fetchFirstType = (type) => {
     axios
       .get(`https://pokeapi.co/api/v2/type/${type}`)
-      .then(response => {
+      .then((response) => {
         setFirstTypePokemon(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
 
-  const fetchSecondType = type => {
+  const fetchSecondType = (type) => {
     axios
       .get(`https://pokeapi.co/api/v2/type/${type}`)
-      .then(response => {
+      .then((response) => {
         setSecondTypePokemon(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
   let elementToRender = null;
 
   if (firstChecked) {
-    elementToRender = firstTypePokemon.pokemon?.map(pokemon => (
+    elementToRender = firstTypePokemon.pokemon?.map((pokemon) => (
       <Text key={pokemon?.pokemon.name}>{pokemon?.pokemon.name}</Text>
     ));
   } else {
-    elementToRender = secondTypePokemon.pokemon?.map(pokemon => (
+    elementToRender = secondTypePokemon.pokemon?.map((pokemon) => (
       <Text key={pokemon?.pokemon.name}>{pokemon?.pokemon.name}</Text>
     ));
   }
 
   if (firstChecked && secondChecked) {
     const firstMap = firstTypePokemon.pokemon?.map(
-      pokemon => pokemon.pokemon.name
+      (pokemon) => pokemon.pokemon.name
     );
     const secondMap = secondTypePokemon.pokemon?.map(
-      pokemon => pokemon.pokemon.name
+      (pokemon) => pokemon.pokemon.name
     );
 
     let sameTypePokemon = [];
-    sameTypePokemon = firstMap?.filter(pokemon => secondMap?.includes(pokemon));
+    sameTypePokemon = firstMap?.filter((pokemon) =>
+      secondMap?.includes(pokemon)
+    );
 
-    elementToRender = sameTypePokemon?.map(pokemon => (
+    elementToRender = sameTypePokemon?.map((pokemon) => (
       <div key={pokemon}>{pokemon}</div>
     ));
   }

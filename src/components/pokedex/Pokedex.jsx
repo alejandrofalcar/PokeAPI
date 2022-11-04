@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   getPokemons,
   getPokemonsData,
   searchPokemon,
-} from '../../services/Api';
+} from "../../services/Api";
 import {
   Image,
   Box,
@@ -11,20 +11,20 @@ import {
   IconButton,
   SimpleGrid,
   Flex,
-} from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { backgroundPokedex } from '../styles';
-import { InfoIcon } from '@chakra-ui/icons';
-import { Pagination } from './Pagination';
-import { Search } from './Search';
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { backgroundPokedex } from "../styles";
+import { InfoIcon } from "@chakra-ui/icons";
+import { Pagination } from "./Pagination";
+import { Search } from "./Search";
 
 export function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  const onSearch = async pokemon => {
+  const onSearch = async (pokemon) => {
     if (!pokemon) {
       return fetchPokemons();
     }
@@ -41,7 +41,7 @@ export function Pokedex() {
   const fetchPokemons = async () => {
     try {
       const data = await getPokemons(30, 30 * page);
-      const promises = data.results.map(async pokemon => {
+      const promises = data.results.map(async (pokemon) => {
         return await getPokemonsData(pokemon.url);
       });
       const results = await Promise.all(promises);
@@ -69,7 +69,7 @@ export function Pokedex() {
 
   return (
     <Box>
-      <Flex justifyContent={'flex-end'} alignItems={'center'}>
+      <Flex justifyContent={"flex-end"} alignItems={"center"}>
         <Box>
           <Search onSearch={onSearch} />
         </Box>
@@ -84,37 +84,37 @@ export function Pokedex() {
         </Box>
       </Flex>
       <SimpleGrid minChildWidth={250} spacingX={8} spacingY={6} p={3}>
-        {pokemons.map(pokemon => (
+        {pokemons.map((pokemon) => (
           <Box
             bg={backgroundPokedex(pokemon)}
-            rounded={'lg'}
+            rounded={"lg"}
             maxW={300}
             key={pokemon.name}
           >
             <Box>
-              <Heading fontSize={'4xl'} color={'white'} align={'center'} pt={3}>
-                {'#' + pokemon.id}
+              <Heading fontSize={"4xl"} color={"white"} align={"center"} pt={3}>
+                {"#" + pokemon.id}
               </Heading>
             </Box>
             <Box>
               <motion.div whileHover={{ scale: 1.06 }} key={pokemon.name}>
                 <Image
-                  src={pokemon.sprites.other['official-artwork'].front_default}
+                  src={pokemon.sprites.other["official-artwork"].front_default}
                 />
               </motion.div>
             </Box>
-            <Box align={'center'}>
-              <Box align={'center'}>
-                <Heading fontSize={'2xl'} fontWeight={500} color={'white'}>
+            <Box align={"center"}>
+              <Box align={"center"}>
+                <Heading fontSize={"2xl"} fontWeight={500} color={"white"}>
                   {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
                 </Heading>
               </Box>
-              <Box align={'center'} p={3}>
+              <Box align={"center"} p={3}>
                 <Link to={`${pokemon.name}`}>
                   <IconButton
                     icon={<InfoIcon />}
-                    variant={'solid'}
-                    colorScheme={'whiteAlpha'}
+                    variant={"solid"}
+                    colorScheme={"whiteAlpha"}
                   />
                 </Link>
               </Box>

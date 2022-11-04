@@ -1,8 +1,8 @@
-import Pokedex from './components/pokedex/Pokedex';
-import { Route, Routes } from 'react-router-dom';
-import { Pokemon } from './components/pokemon/Pokemon';
-import Navbar from './components/Navbar';
-import { Homepage } from './components/Homepage';
+import Pokedex from "./components/pokedex/Pokedex";
+import { Route, Routes } from "react-router-dom";
+import { Pokemon } from "./components/pokemon/Pokemon";
+import Navbar from "./components/Navbar";
+import { Homepage } from "./components/Homepage";
 
 export default function App() {
   return (
