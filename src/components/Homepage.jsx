@@ -1,18 +1,55 @@
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Flex, Box, Text, Image } from "@chakra-ui/react";
 
 export function Homepage() {
   return (
-    <Flex p={4} alignItems={"center"} justifyContent={"center"}>
-      <Box width={700} bg={"gray.300"} rounded={"xl"} p={5}>
-        <Text>
-          PokeAPI es una aplicación Front-End que se conecta a una API gratuita
-          llamada PokeApi, y facilita la visualización y búsqueda de pokemon a
-          través de una interfaz minimalista. Esta aplicación fue desarrollada
-          con el objetivo de poner en práctica conceptos de React como el uso de
-          Hooks, Custom Hooks y Routes. Además, el uso de nuevas tecnologías:
-          ChakraUI como CSS Framework.
-        </Text>
+    <Box alignItems={"center"} justifyContent={"center"}>
+      <Box>
+        <Image
+          src={
+            "https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/others_3/SI_Pokemon.jpg"
+          }
+        />
       </Box>
-    </Flex>
+      <Flex justifyContent={"center"} p={5} gap={5}>
+        <Box
+          alignItems={"center"}
+          justifyContent={"center"}
+          width={{base: 100, lg: 700}}
+          bg={"yellow.300"}
+          rounded={"xl"}
+          p={5}
+        >
+          <Text>
+            Bienvenidos a la Pokedex de The Pokémon Company International.
+            Gracias a esta aplicación encontrarás todo lo necesario para
+            convertirte en el mejor entrenador del mundo en Pokémon.
+          </Text>
+        </Box>
+        <Box
+          alignItems={"center"}
+          justifyContent={"center"}
+          width={{base: 100, lg: 700}}
+          bg={"yellow.300"}
+          rounded={"xl"}
+          p={5}
+        >
+          <Text>
+            Para comenzar tu aventura, solo tienes que darle clic en el menú superior a la pestaña de la Pokedex, allí aparecerán todas las tarjetas de todos los Pokemon que existen.
+          </Text>
+        </Box>
+        <Box
+          alignItems={"center"}
+          justifyContent={"center"}
+          width={{base: 100, lg: 700}}
+          bg={"yellow.300"}
+          rounded={"xl"}
+          p={5}
+        >
+          <Text>
+            ¡Nuestro último videojuego, Pokémon: Escarlata y Púrpura ya está en el mercado! ¿Lo has jugado ya?
+          </Text>
+        </Box>
+      </Flex>
+    </Box>
   );
 }

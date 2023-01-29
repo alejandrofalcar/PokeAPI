@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, useColorModeValue } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
@@ -17,7 +17,12 @@ export default function Navbar() {
         fontFamily={"heading"}
       >
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text>PokeAPI</Text>
+          <Image
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/The_Pok%C3%A9mon_Company_International_logo.svg/1280px-The_Pok%C3%A9mon_Company_International_logo.svg.png"
+            }
+            width="200px"
+          />
         </Flex>
         <Flex>
           <Box mr={3}>
